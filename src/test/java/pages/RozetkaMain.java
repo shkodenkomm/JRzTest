@@ -44,14 +44,12 @@ public class RozetkaMain extends  BasePage {
         closePopup();
         return new SmartTvDevisesPage(baseDriver);
     }
-/*
 
+    public TovaryDliaDomaPage openTovaryDliaDoma() {
+        goodsHomeLink.click();
+        getWt(15).until(urlContains("tovary-dlya-doma"));
+        closePopup();
+        return new TovaryDliaDomaPage(baseDriver);
+    }
 
-    def open_tovary_dlya_doma(self):
-        self.goods_home_link.click()
-        self.close_popup()
-        return GoodsHome(self.drv)
-    *
-    *
-    * */
 }
