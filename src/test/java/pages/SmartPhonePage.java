@@ -31,7 +31,7 @@ public class SmartPhonePage extends GoodsBasePage {
             try{ sleep(500);  }catch (InterruptedException e) {}
 
             getWt(20).until( elementToBeClickable(By.xpath(String.format(xpath_page,  i)))).click();
-            try{ sleep(3000);  }catch (InterruptedException e) {}
+            try{ sleep(5000);  }catch (InterruptedException e) {}
             goods_names.addAll(getWt(20).until(presenceOfAllElementsLocatedBy(By.xpath(xpath_goods_names))));
 
             goods_names.forEach(el -> r.add(el.getText()));
