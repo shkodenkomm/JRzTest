@@ -5,23 +5,22 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.*;
-import utils.JRzUtils;
 
 import javax.mail.MessagingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 import static utils.JRzUtils.rz_send_mail;
+import static utils.JRzUtils.sortByValue;
 import static utils.JRzUtils.save_to_xlsx;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SmartPhonesFilteredList {
 
-    private static HashMap<String,String> tp, tp1;
+    private static HashMap<String,Integer> tp, tp1;
     private static WebDriver drv ;
     private static BasePage bfPage;
     private static Path xlsx_file;
@@ -52,9 +51,7 @@ public class SmartPhonesFilteredList {
     @Test
     public void  test2_open_phones_tv_other()  throws Exception {
         assertNotNull("MainPage null", bfPage );
-        SmartTvDevisesPage std =((RozetkaMain)bfPage).openSmartTvDevises();
-        bfPage = std;
-
+        bfPage = ((RozetkaMain)bfPage).openSmartTvDevises();
         assertNotNull("SmartTvDevisesPage  null", bfPage );
     }
 
@@ -62,9 +59,7 @@ public class SmartPhonesFilteredList {
     @Test
     public void  test3_open_phones() {
         assertNotNull("SmartTvDevisesPage null", bfPage );
-        PhonePage phones =((SmartTvDevisesPage)bfPage).open_phones();
-        bfPage = phones;
-
+        bfPage = ((SmartTvDevisesPage)bfPage).open_phones();
         assertNotNull("PhonePage  null", bfPage );
     }
 
@@ -72,9 +67,7 @@ public class SmartPhonesFilteredList {
     @Test
     public void  test4_open_smartphones(){
         assertNotNull("PhonePage null", bfPage );
-        SmartPhonePage smpp =((PhonePage)bfPage).open_smartphones();
-        bfPage = smpp;
-
+        bfPage = ((PhonePage)bfPage).open_smartphones();
         assertNotNull("SmartPhonePage  null", bfPage );
     }
 
@@ -118,7 +111,9 @@ public class SmartPhonesFilteredList {
         assertNotNull("top_smart_title_price null", tp );
         assertNotNull("smart_title_price_3000_6000 null", tp1 );
 
-        save_to_xlsx(xlsx_file, tp, tp1);
+        Map<String, Integer>sortedTp1 = sortByValue(tp1);
+
+        save_to_xlsx(xlsx_file, tp, sortedTp1);
 
         ArrayList<String> to_list = new ArrayList<String>( ){};
         to_list.add("shkodenkomm@gmail.com");

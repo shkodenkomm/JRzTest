@@ -17,10 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Security;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
-
+import java.util.*;
 
 
 public class JRzUtils {
@@ -80,7 +77,7 @@ public class JRzUtils {
         t.close();
     }
 
-    public  static void save_to_xlsx(Path f, HashMap<String,String> t1,HashMap<String,String> t2){
+    public  static void save_to_xlsx(Path f, Map<String,Integer> t1,Map<String,Integer> t2){
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sh1 = workbook.createSheet("Top sale");
         XSSFSheet sh2 = workbook.createSheet("from 3000 to 6000 uah");
@@ -110,6 +107,25 @@ public class JRzUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> unsortMap) {
+
+        List<Map.Entry<K, V>> list =
+                new LinkedList<Map.Entry<K, V>>(unsortMap.entrySet());
+
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return -(o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
 
     }
 }

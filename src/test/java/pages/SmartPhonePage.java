@@ -42,10 +42,10 @@ public class SmartPhonePage extends GoodsBasePage {
         return  r;
     }
 
-    public HashMap<String,String> get_titles_prises(int maxPage, String titles, String prises) {
+    public HashMap<String,Integer> get_titles_prises(int maxPage, String titles, String prises) {
         ArrayList<String> rt =new ArrayList<>();
-        ArrayList<String> rp =new ArrayList<>();
-        HashMap<String,String> res = new HashMap<>();
+        ArrayList<Integer> rp =new ArrayList<>();
+        HashMap<String,Integer> res = new HashMap<>();
 
 
 
@@ -61,7 +61,7 @@ public class SmartPhonePage extends GoodsBasePage {
         ));
 
         qt.forEach(el -> rt.add(el.getText()));
-        qp.forEach(el -> rp.add(el.getText()));
+        qp.forEach(el -> rp.add(new Integer( el.getText().replaceAll("[^0-9]",""))));
 
         for (int i=2; i<=maxPage; i++){
             qt.clear();
@@ -76,7 +76,7 @@ public class SmartPhonePage extends GoodsBasePage {
                 qp.addAll(getWt(10).until(presenceOfAllElementsLocatedBy(By.xpath(prises))));
 
                 qt.forEach(el -> rt.add(el.getText()));
-                qp.forEach(el -> rp.add(el.getText()));
+                qp.forEach(el -> rp.add(new Integer( el.getText().replaceAll("[^0-9]",""))));
 
             }catch(TimeoutException e ){
                 System.out.print("empty page "+baseDriver.getCurrentUrl());
