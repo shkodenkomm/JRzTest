@@ -24,18 +24,20 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.11.0'
     compile group: 'javax.mail', name: 'mail', version: '1.4.1'
     compile 'org.mongodb:mongo-java-driver:3.7.0'
-
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
     testCompile "junit:junit:4.12"
 
 
 }
 
-task testSuite(type: Test) {
-    include 'RzTs1.class'
+task test1(type: Test) {
+    include 'tests/SmartPhonePage.class'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'ttt'
-    }
+task test2(type: Test) {
+    include 'tests/PoroshkiDlaStyrky.class'
+}
+
+task test3(type: Test) {
+    include 'tests/SmartPhonesFilteredList.class'
 }

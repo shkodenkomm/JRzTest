@@ -23,7 +23,7 @@ import static junit.framework.TestCase.assertTrue;
 public class SmartPhonesList {
 
         private static WebDriver drv ;
-        private static BasePage bfPage;
+        protected static BasePage bfPage;
         private static Path fileGoodsNames;
 
 
@@ -101,16 +101,11 @@ public class SmartPhonesList {
         /** отправить данный файл по списку рассылки
            (e-mails из отдельного файла) */
         @Test
-        public void test6_sand_emails(){
+        public void test6_sand_emails() throws MessagingException {
             assertTrue(Files.exists(fileGoodsNames));
-            ArrayList<String> to_list = new ArrayList<String>();
+            ArrayList<String> to_list = new ArrayList<String>(){};
             to_list.add("shkodenkomm@gmail.com");
-            try {
-                JRzUtils.rz_send_mail("is file", to_list, fileGoodsNames );
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-
+            JRzUtils.rz_send_mail("is file", to_list, fileGoodsNames );
         }
 
 

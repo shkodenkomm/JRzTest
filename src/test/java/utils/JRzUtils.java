@@ -1,16 +1,27 @@
 package utils;
 
 import com.sun.mail.smtp.SMTPTransport;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Security;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
+
+
 
 public class JRzUtils {
 
@@ -67,5 +78,38 @@ public class JRzUtils {
         t.connect("smtp.meta.ua", login, password);
         t.sendMessage(msg, msg.getAllRecipients());
         t.close();
+    }
+
+    public  static void save_to_xlsx(Path f, HashMap<String,String> t1,HashMap<String,String> t2){
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sh1 = workbook.createSheet("Top sale");
+        XSSFSheet sh2 = workbook.createSheet("from 3000 to 6000 uah");
+
+        int rowNum = 0;
+
+        for (String key: t1.keySet()) {
+            Row row = sh1.createRow(rowNum++);
+            row.createCell(0).setCellValue(key);
+            row.createCell(1).setCellValue(t1.get(key));
+        }
+
+        rowNum = 0;
+
+        for (String key: t2.keySet()) {
+            Row row = sh2.createRow(rowNum++);
+            row.createCell(0).setCellValue(key);
+            row.createCell(1).setCellValue(t2.get(key));
+        }
+
+        try ( FileOutputStream outputStream = new FileOutputStream(String.valueOf(f.toAbsolutePath()))){
+            workbook.write(outputStream);
+            workbook.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
