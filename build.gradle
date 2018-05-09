@@ -31,7 +31,7 @@ dependencies {
 }
 
 task test1(type: Test) {
-    include 'tests/SmartPhonePage.class'
+    include 'tests/SmartPhonesList.class'
 }
 
 task test2(type: Test) {
