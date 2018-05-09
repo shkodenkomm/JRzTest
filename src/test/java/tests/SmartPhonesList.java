@@ -39,7 +39,7 @@ public class SmartPhonesList {
 
             options.setBinary("C:\\Users\\mm\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe");
 
-            drv = new ChromeDriver();
+            drv = new ChromeDriver(options);
         }
 
 

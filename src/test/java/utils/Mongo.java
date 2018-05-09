@@ -10,7 +10,7 @@ import org.bson.Document;
 public class Mongo {
 
     private  static MongoCollection<Document> get_collection(String c_name){
-        MongoClient mongo = new MongoClient( "localhost" , 27017 );
+        MongoClient mongo = new MongoClient( "127.0.0.1" , 27017 );
         MongoDatabase db = mongo.getDatabase("rz");
         MongoCollection<Document> cl = db.getCollection("c_name");
 
