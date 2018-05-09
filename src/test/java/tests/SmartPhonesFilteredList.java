@@ -36,7 +36,7 @@ public class SmartPhonesFilteredList {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
         options.addArguments("window-size=1200x600");
-
+        options.setBinary("C:\\Users\\mm\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe");
         drv = new ChromeDriver();
     }
 
