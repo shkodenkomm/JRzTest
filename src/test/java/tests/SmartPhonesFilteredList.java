@@ -4,6 +4,7 @@ import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import pages.*;
 
 import javax.mail.MessagingException;
@@ -31,6 +32,11 @@ public class SmartPhonesFilteredList {
     public static void beforeClass() {
         xlsx_file = Paths.get("").toAbsolutePath().resolve(Paths.get("src","test","java","files","smarts_titles_prises.xlsx"));
         System.setProperty("webdriver.chromedriver.driver","chromedriver");
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("headless");
+        options.addArguments("window-size=1200x600");
+
         drv = new ChromeDriver();
     }
 

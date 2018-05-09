@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import pages.*;
 import utils.Mongo.*;
 
@@ -34,7 +35,11 @@ public class PoroshkiDlaStyrky {
     public static void beforeClass() {
         fileGoodsNames = Paths.get("").toAbsolutePath().resolve(Paths.get("src","test","java","files","fileGoodsNames.txt"));
         System.setProperty("webdriver.chromedriver.driver","chromedriver");
-        drv = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("headless");
+        options.addArguments("window-size=1200x600");
+
+        drv = new ChromeDriver(options);
     }
 
 

@@ -5,6 +5,7 @@ import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import pages.*;
 import utils.JRzUtils;
 
@@ -31,6 +32,11 @@ public class SmartPhonesList {
         public static void beforeClass() {
             fileGoodsNames = Paths.get("").toAbsolutePath().resolve(Paths.get("src","test","java","files","fileGoodsNames.txt"));
             System.setProperty("webdriver.chromedriver.driver","chromedriver");
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("headless");
+            options.addArguments("window-size=1200x600");
+
             drv = new ChromeDriver();
         }
 
