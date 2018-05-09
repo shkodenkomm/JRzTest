@@ -23,7 +23,7 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.11.0'
     compile group: 'javax.mail', name: 'mail', version: '1.4.1'
-    compile group: 'org.firebirdsql.jdbc', name: 'jaybird', version: '2.2.5', ext: 'pom'
+    compile 'org.mongodb:mongo-java-driver:3.7.0'
 
     testCompile "junit:junit:4.12"
 

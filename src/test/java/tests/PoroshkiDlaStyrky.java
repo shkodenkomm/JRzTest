@@ -1,5 +1,6 @@
 package tests;
 
+import org.bson.Document;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -8,13 +9,17 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.*;
+import utils.Mongo.*;
+
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
+import static utils.Mongo.save_test;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PoroshkiDlaStyrky {
@@ -82,23 +87,17 @@ public class PoroshkiDlaStyrky {
     @Test
     public void  test6_get_poroshki_za_100_300(){
         assertNotNull("BytovayaHimiyaPage null", bfPage );
-        ArrayList<String> ps =((PoroshkiDlyaStirkPage)bfPage).get_poroshki_za_100_300(5);
-        assertNotNull(ps);
-        assertTrue(ps.size()>0);
+        titles =((PoroshkiDlyaStirkPage)bfPage).get_poroshki_za_100_300(5);
+        assertNotNull(titles);
+        assertTrue(titles.size()>0);
+    }
+
+    /** записать полученные результаты в базу данных */
+    @Test
+    public void  test7_save_to_db(){
+        assertNotNull("titles null", titles  );
+        Document d = new Document("test_date",LocalDateTime.now()).append("titles", titles);
+        save_test(d, "test_result");
+
     }
 }
-
-/*
-    def test7_save_to_db(self):
-        """записать полученные результаты в базу данных"""
-        self.assertTrue("rlist" in self.parent_suite.params)
-
-        id = None
-
-        id = utils.save_to_db({"date": datetime.now(),
-                               "results":self.parent_suite.params["rlist"]
-                               })
-
-        self.assertIsNotNone(id)
-        self.log.info(str(id.inserted_id))
-* */
