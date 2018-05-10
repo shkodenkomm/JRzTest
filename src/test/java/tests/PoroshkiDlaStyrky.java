@@ -36,9 +36,17 @@ public class PoroshkiDlaStyrky {
         fileGoodsNames = Paths.get("").toAbsolutePath().resolve(Paths.get("src","test","java","files","fileGoodsNames.txt"));
         System.setProperty("webdriver.chromedriver.driver","chromedriver");
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("headless");
-        options.addArguments("window-size=1200x600");
-        options.setBinary("C:\\Users\\mm\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe");
+
+        if(System.getProperty("test-headless")!=null) {
+            options.addArguments("headless");
+        }
+        if(System.getProperty("test-window-size")!=null){
+            options.addArguments("window-size="+System.getProperty("window-size"));
+        }
+
+        if(System.getProperty("test-binary")!=null) {
+            options.setBinary(System.getProperty("test-binary"));
+        }
 
         drv = new ChromeDriver(options);
     }
@@ -52,6 +60,8 @@ public class PoroshkiDlaStyrky {
     /** зайти на сайт rozetka.com.ua */
     @Test
     public void  test1_open_main_page()   {
+        System.out.println();
+
         bfPage = new RozetkaMain(drv,null).loadPage();
 
     }
