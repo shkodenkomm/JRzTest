@@ -60,7 +60,7 @@ public class SmartPhonesList {
                 log.info("headless - "+System.getProperty("test-headless"));
             }
             if(System.getProperty("test-window-size")!=null){
-                options.addArguments("--window-size="+System.getProperty("window-size"));
+                options.addArguments("--window-size="+System.getProperty("test-window-size"));
             }
 
             log.info("test-binary - "+System.getProperty("test-binary"));
