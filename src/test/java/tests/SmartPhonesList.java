@@ -58,10 +58,9 @@ public class SmartPhonesList {
             if(System.getProperty("test-headless")!=null) {
                 options.setHeadless(true);
                 log.info("headless - "+System.getProperty("test-headless"));
-                options.addArguments("headless");
             }
             if(System.getProperty("test-window-size")!=null){
-                options.addArguments("window-size="+System.getProperty("window-size"));
+                options.addArguments("--window-size="+System.getProperty("window-size"));
             }
 
             log.info("test-binary - "+System.getProperty("test-binary"));
@@ -70,6 +69,9 @@ public class SmartPhonesList {
             }
 
             options.addArguments("no-sandbox");
+
+            options.addArguments("--log-level=1");
+            options.addArguments("--silent");
 
             drv = new ChromeDriver(options);
             log.info("END");
