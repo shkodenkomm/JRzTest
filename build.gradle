@@ -34,7 +34,8 @@ dependencies {
 
 task test1(type: Test) {
     testLogging {
-        events "standardOut"
+
+        events "standardOut", "PASSED", "STARTED", "FAILED", "SKIPPED"
     }
     systemProperties project.properties.subMap(["test-headless", "test-window-size","test-binary"])
     include 'tests/SmartPhonesList.class'
