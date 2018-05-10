@@ -34,9 +34,11 @@ public class SmartPhonesFilteredList {
         System.setProperty("webdriver.chromedriver.driver","chromedriver");
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("headless");
-        options.addArguments("window-size=1200x600");
-        options.setBinary("C:\\Users\\mm\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe");
+        if(System.getProperty("test-headless")!=null) {   options.setHeadless(true);  }
+        if(System.getProperty("test-window-size")!=null){ options.addArguments("--window-size="+System.getProperty("test-window-size")); }
+        if(System.getProperty("test-binary")!=null) { options.setBinary(System.getProperty("test-binary")); }
+        options.addArguments("--no-sandbox");
+
         drv = new ChromeDriver(options);
     }
 

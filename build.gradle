@@ -31,10 +31,8 @@ dependencies {
 }
 
 
-
 task test1(type: Test) {
     testLogging {
-
         events "STANDARD_OUT", "PASSED", "STARTED", "FAILED", "SKIPPED"
     }
     systemProperties project.properties.subMap(["test-headless", "test-window-size","test-binary"])
@@ -42,11 +40,17 @@ task test1(type: Test) {
 }
 
 task test2(type: Test) {
+    testLogging {
+        events "STANDARD_OUT", "PASSED", "STARTED", "FAILED", "SKIPPED"
+    }
     systemProperties project.properties.subMap(["test-headless", "test-window-size","test-binary"])
     include 'tests/PoroshkiDlaStyrky.class'
 }
 
 task test3(type: Test) {
+    testLogging {
+        events "STANDARD_OUT", "PASSED", "STARTED", "FAILED", "SKIPPED"
+    }
     systemProperties project.properties.subMap(["test-headless", "test-window-size","test-binary"])
     include 'tests/SmartPhonesFilteredList.class'
 }

@@ -32,10 +32,11 @@ public class SmartPhonesList {
         private static Logger log = Logger.getLogger(SmartPhonesList.class.getName());
 
         @BeforeClass
-        public static void beforeClass() {
+        public static void beforeClass() throws IOException {
             log.setUseParentHandlers(false);
-            ConsoleHandler ch = new ConsoleHandler();
-            ch.setFormatter(new Formatter() {
+            String logname = Paths.get("").toAbsolutePath().resolve(Paths.get("src","test","java","files","SmartPhonesList.log")).toString();
+            FileHandler fh = new FileHandler(logname, true);
+            fh.setFormatter(new Formatter() {
                 @Override
                 public String format(LogRecord r) {
                     return  new StringBuilder(LocalTime.now().toString()).append(" ")
@@ -45,7 +46,7 @@ public class SmartPhonesList {
                             .toString()
                             ;
                 }});
-            log.addHandler(ch);
+            log.addHandler(fh);
 
             log.info("START");
 
@@ -54,24 +55,10 @@ public class SmartPhonesList {
 
             ChromeOptions options = new ChromeOptions();
 
-
-            if(System.getProperty("test-headless")!=null) {
-                options.setHeadless(true);
-                log.info("headless - "+System.getProperty("test-headless"));
-            }
-            if(System.getProperty("test-window-size")!=null){
-                options.addArguments("--window-size="+System.getProperty("test-window-size"));
-            }
-
-            log.info("test-binary - "+System.getProperty("test-binary"));
-            if(System.getProperty("test-binary")!=null) {
-                options.setBinary(System.getProperty("test-binary"));
-            }
-
-            options.addArguments("no-sandbox");
-
-            options.addArguments("--log-level=1");
-            options.addArguments("--silent");
+            if(System.getProperty("test-headless")!=null) {   options.setHeadless(true);  }
+            if(System.getProperty("test-window-size")!=null){ options.addArguments("--window-size="+System.getProperty("test-window-size")); }
+            if(System.getProperty("test-binary")!=null) { options.setBinary(System.getProperty("test-binary")); }
+            options.addArguments("--no-sandbox");
 
             drv = new ChromeDriver(options);
             log.info("END");
