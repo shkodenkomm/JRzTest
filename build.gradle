@@ -30,17 +30,22 @@ dependencies {
 
 }
 
+
+
 task test1(type: Test) {
     testLogging {
         events "standardOut"
     }
+    systemProperties project.properties.subMap(["test-headless", "test-window-size","test-binary"])
     include 'tests/SmartPhonesList.class'
 }
 
 task test2(type: Test) {
+    systemProperties project.properties.subMap(["test-headless", "test-window-size","test-binary"])
     include 'tests/PoroshkiDlaStyrky.class'
 }
 
 task test3(type: Test) {
+    systemProperties project.properties.subMap(["test-headless", "test-window-size","test-binary"])
     include 'tests/SmartPhonesFilteredList.class'
 }
