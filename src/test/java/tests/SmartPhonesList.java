@@ -61,10 +61,11 @@ public class SmartPhonesList {
                 options.addArguments("window-size="+System.getProperty("window-size"));
             }
 
+            log.info("test-binary - "+System.getProperty("test-binary"));
             if(System.getProperty("test-binary")!=null) {
                 options.setBinary(System.getProperty("test-binary"));
             }
-            log.info(System.getProperty("test-binary"));
+
             drv = new ChromeDriver(options);
             log.info("END");
         }
