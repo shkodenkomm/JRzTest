@@ -54,10 +54,11 @@ public class SmartPhonesList {
 
             ChromeOptions options = new ChromeOptions();
 
-            log.info("test-binary - "+System.getProperty("test-headless"));
+
             if(System.getProperty("test-headless")!=null) {
                 options.setHeadless(true);
-                //options.addArguments("headless");
+                log.info("headless - "+System.getProperty("test-headless"));
+                options.addArguments("headless");
             }
             if(System.getProperty("test-window-size")!=null){
                 options.addArguments("window-size="+System.getProperty("window-size"));
